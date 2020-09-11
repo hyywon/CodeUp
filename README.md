@@ -1,6 +1,6 @@
-# CodeUp
-> Python으로 준비하기 🐱‍🏍
+# CodeUp <br>
+# Python으로 준비하기 🐱‍🏍
 
-2020/09 -
+> 2020/09 -
 
 
