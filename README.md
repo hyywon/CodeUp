@@ -1,7 +1,8 @@
-# CodeUp 
+# Python으로 준비하기 🐱‍🏍
 
- Python으로 준비하기 🐱‍🏍
- --------------------------
+> Python 기초, 알고리즘 공부하기 🐱‍👓
+
+## CodeUp 
 
 
 * python (기초 100제)
@@ -13,5 +14,8 @@
   - 1081 ~ 1098번 (2020-09-22)
   - 1099번 (2020-09-23)
 
-# Python
- 3학년 여름방학 Python Crwaling 공부 (2020-07-21)
+
+## BAEKJOON Online Judge
+
+* Greedy Algorithm
+  - 2839, 설탕 배달(2020-10-01)
