@@ -30,15 +30,22 @@ rang = 0
 for i in range(num):
     num_list.append(int(sys.stdin.readline()))
 
-mean = round(sum(num_list)/num)
+# 산술 평균
+mean = round(sum(num_list) / num)
+# 정렬 후
 num_list = sorted(num_list)
-mid = num_list[round(num//2)]
+# 중앙값
+mid = num_list[round(num // 2)]
+# 최빈값
+# Counter는 ' 값 : 갯수 ' 형태의 dict 을 반환, most common 을 이용해서 많은 순으로 정렬 
 most = Counter(num_list)
 most = most.most_common()
+# 범위 
 rang = max(num_list) - min(num_list)
 
 print(mean)
 print(mid)
+# word 가 한개 이상일 때 만 동일 최빈값 중 2번째로 작은 값을 구하는 코드 실행
 if len(most) > 1:
     if most[0][1] == most[1][1]:
         print(most[1][0])
