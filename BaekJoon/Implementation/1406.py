@@ -15,42 +15,45 @@
 # 출력
 # 첫째 줄에 모든 명령어를 수행하고 난 후 편집기에 입력되어 있는 문자열을 출력한다.
 
+# dequeue를 사용하여 문제 풀기
+from collections import deque
 import sys
 
 word = list(input())
 edit = int(input())
 command = []
 
+front = deque(word)
+behind = deque()
 case = ['L', 'D', 'B', 'P']
 
 for i in range(edit):
     command.append(str(sys.stdin.readline()))
 
-cursor = -1
-# 마지막 인덱스에 커서 위치
-
 for m in range(len(command)):
     i = command[m]
     if i.startswith('L'):
-        cursor -= 1
+        if front:
+            a = front.pop()
+            behind.appendleft(a)
+        else:
+            pass
     if i.startswith('D'):
-        if cursor == -1:
-            pass
+        if behind:
+            a = behind.popleft()
+            front.append(a)
         else:
-            cursor += 1
+            pass
     if i.startswith('B'):
-        if cursor < -len(word):
-            pass
+        if behind:
+            if front:
+                front.pop()
+            else:
+                pass
         else:
-            del word[cursor]
+            front.pop()
     if i.startswith('P'):
-        if cursor == -1:
-            word.append(i[2])
-            cursor = -1
-        elif cursor >= -len(word):
-            word.insert(cursor + 1, i[2])
-        elif cursor < -len(word):
-            word.insert(cursor, i[2])
+        front.append(i[2])
 
-string = "".join(word)
-print(string)
+editor_word = "".join(front) + "".join(behind)
+print(editor_word)
