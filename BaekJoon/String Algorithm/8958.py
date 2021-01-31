@@ -34,6 +34,5 @@ for j in ox:
         # X일 경우 cnt 를 0으로 초기화 
         elif i == 'X':
             cnt = 0
-            score += cnt
     print(score)
 
