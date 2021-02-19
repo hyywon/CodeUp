@@ -20,17 +20,29 @@
 
 from sys import stdin
 read = stdin.readline
+from collections import deque
 dic={}
-vis=[]
+vis_dfs=[]
+vis_bfs=[]
+
 
 # DFS로 구현
 def dfs(start, dic):
     for i in dic[start]:
         # vis 리스트에 없으면 추가하고, 추가 된 노드부터 깊이 우선 탐색을 계속 해줌
-        if i not in vis:
-            vis.append(i)
+        if i not in vis_dfs:
+            vis_dfs.append(i)
             dfs(i,dic)
 
+
+def bfs(start):
+    chk = deque([start])
+    while chk:
+        com = chk.popleft()
+        for c in dic[com]:
+            if c not in vis_bfs:
+                chk.append(c)
+                vis_bfs.append(c)
 
 for i in range(int(read())):
     dic[i+1] = set()
@@ -41,8 +53,15 @@ for j in range(int(read())):
     dic[a].add(b)
     dic[b].add(a)
 
+
 # 1 부터 시작해서 
 dfs(1,dic)
+bfs(1)
 
 # 시작하는 1도 포함되기 때문에 -1 해줌
-print(len(vis)-1)
+
+dfsout = f"dfs : {len(vis_dfs)-1}"
+bfsout = f"bfs : {len(vis_bfs)-1}"
+
+print(dfsout)
+print(bfsout)
