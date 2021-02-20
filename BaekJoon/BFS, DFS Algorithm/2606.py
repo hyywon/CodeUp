@@ -34,7 +34,7 @@ def dfs(start, dic):
             vis_dfs.append(i)
             dfs(i,dic)
 
-
+# BFS로 구현
 def bfs(start):
     chk = deque([start])
     while chk:
@@ -59,7 +59,6 @@ dfs(1,dic)
 bfs(1)
 
 # 시작하는 1도 포함되기 때문에 -1 해줌
-
 dfsout = f"dfs : {len(vis_dfs)-1}"
 bfsout = f"bfs : {len(vis_bfs)-1}"
 

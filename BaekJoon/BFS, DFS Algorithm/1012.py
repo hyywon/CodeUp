@@ -28,6 +28,7 @@
 
 import sys
 read = sys.stdin.readline
+from collections import deque
 
 # dfs 시간초과 검색하니까 뜸 재귀 시간초과 때문에 ,, ,, ,,
 sys.setrecursionlimit(10 ** 6)
@@ -42,21 +43,38 @@ t = int(read())
 
 
 
-def dfs(x,y):
-    global cnt
+def bfs(x,y):
     # 배추벌레가 있기 때문에 dfs가 실행됨 , vis에 기록
     vis[x][y] = 1
+    chk = deque()
+    chk.append((x,y))
+    while chk:
+        x,y = chk.popleft()
+        for i in range(4):
+            fx = x + dx[i]
+            fy = y + dy[i]
 
+            if 0 <= fx and fx < n and 0 <= fy and fy < m:
+                # 배추 벌레가 있고, 방문하지 않았을 경우에만 dfs 실행
+                if mat[fx][fy] == 1 and vis[fx][fy] == 0:
+                    chk.append((fx,fy))
+                    bfs(fx,fy)
+
+
+def dfs(x,y):
+    print(x,end=",")
+    print(y)
+    global cnt
+    vis[x][y] = 1
     for i in range(4):
         fx = x + dx[i]
-        fy = y + dy[i]
+        fy = y + dy[i]    
 
         if 0 <= fx and fx < n and 0 <= fy and fy < m:
             # 배추 벌레가 있고, 방문하지 않았을 경우에만 dfs 실행
             if mat[fx][fy] == 1 and vis[fx][fy] == 0:
                 dfs(fx,fy)
 
-    
 
 for _ in range(t):
     m,n,k = map(int, read().split())
@@ -72,7 +90,7 @@ for _ in range(t):
     for i in range(n):
         for j in range(m):
             if mat[i][j] == 1 and vis[i][j] == 0:
-                dfs(i,j)
+                bfs(i,j)
                 cnt += 1
     print(cnt)
 
