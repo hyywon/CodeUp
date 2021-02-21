@@ -27,6 +27,28 @@ t = int(read())
 cnt = 0
 res = []
 
+
+def bfs(x,y):
+    global cnt, count
+    # 집이  있기 때문에 bfs가 실행됨 , vis에 기록하고 집 갯수 +1
+    chk = deque()
+    chk.append((x,y))
+    vis[x][y] = 1
+    count += 1
+
+    while chk:
+        x,y = chk.popleft()
+        for i in range(4):
+            fx = x + dx[i]
+            fy = y + dy[i]
+
+            if 0 <= fx and fx < t and 0 <= fy and fy < t:
+                # 집이 있고, vis에 기록하지 않았을 경우에만 dfs 실행
+                if mat[fx][fy] == 1 and vis[fx][fy] != 1:
+                    chk.append((fx,fy))
+                    bfs(fx,fy)
+
+
 def dfs(x,y):
     global cnt, count
     # 집이  있기 때문에 dfs가 실행됨 , vis에 기록하고 집 갯수 +1
@@ -40,7 +62,7 @@ def dfs(x,y):
         if 0 <= fx and fx < t and 0 <= fy and fy < t:
             # 집이 있고, vis에 기록하지 않았을 경우에만 dfs 실행
             if mat[fx][fy] == 1 and vis[fx][fy] != 1:
-                dfs(fx,fy)
+                bfs(fx,fy)
 
 
 for _ in range(t):
