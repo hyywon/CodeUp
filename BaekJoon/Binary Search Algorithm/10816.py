@@ -26,6 +26,9 @@ m = int(read())
 m_list = list(map(int,read().split()))
 res = []
 
+# 이진 탐색 방법으로 했다가 시간초과 뜸, 문제 분류?에 해쉬 맵 검색을 통해 dict 형식으로 변경
+
+# n_list에서 같은 값들은 "값 : 수" dict 형식으로 만들어 줌 
 for k in n_list:
     if k not in n_count:
         n_count[k] = 1 

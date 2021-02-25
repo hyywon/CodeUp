@@ -36,20 +36,27 @@ low = 0
 high = trees[0]
 res = 0
 
+# 이진 탐색 
 def Search(trees,m,low,high):
     global res
+    print(low,high)
     if low > high:
         return res
     sum = 0
     mid = (low + high) // 2
     for t in trees:
+#   중간높이(mid) 보다 큰 나무일때만 나무 토막 길이를 합함
         if t > mid:
             sum += (t-mid)
+#   전체 합한 토막 길이가 m 보다 크거나 같으면 res에 기록
+#   m보다 크거나 같은 값 중, 최대 높이를 찾기 위해 더 높은 값으로 탐색
     if sum >= m:
         res = mid
+        print(res)
         return Search(trees,m,mid+1,high)
     else:
         return Search(trees,m,low,mid-1)
 
 
+# 자를 수 있는 최대 높이와 최저 높이를 전달
 print(Search(trees,m,low,high))
