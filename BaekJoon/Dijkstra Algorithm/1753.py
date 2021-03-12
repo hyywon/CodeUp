@@ -14,50 +14,43 @@
 # 첫째 줄부터 V개의 줄에 걸쳐, i번째 줄에 i번 정점으로의 최단 경로의 경로값을 출력한다. 
 # 시작점 자신은 0으로 출력하고, 경로가 존재하지 않는 경우에는 INF를 출력하면 된다.
 
-import heapq
-import sys 
+import sys, heapq
 read = sys.stdin.readline
 INF = sys.maxsize
 
-queue = []
+v, e = map(int, sys.stdin.readline().split())
+k = int(sys.stdin.readline())
+graph = [[] for _ in range(v + 1)]
+cost = [INF] * (v + 1)
+heap = []
 
-V, E = map(int, read().split())
-start = int(read())
-cost = [INF] * (V+1)
-graph = [[] for _ in range(V+1)]
+def dijkstra(start):
+    # 시작 node에 대해 초기화
+    cost[start] = 0 # start에서 start로 거리 0으로 초기 설정
+    heapq.heappush(heap, [0, start])
 
-def Dijkstra(start):
-    cost[start] = 0
-    heapq.heappush(queue,(0,start))
+    while heap:
+        # 거리가 제일 작은 node 선택
+        # 현재까지의 거리, 지금 위치한 곳의 정점
+        weight, node = heapq.heappop(heap)
 
-    # heap에 원소가 없을 때 까지 반복,
-    while queue:
-        w, v = heapq.heappop(queue)
-
-        if cost[v] < w:
+        if cost[node] < weight:
+            # 최소 거리일때만 실행
             continue
-    
-        for weight, next in graph[v]:
 
-            next_cost = w + weight
+        # 현재 node와 연결된 다른 node를 확인
+        for cur_node, cur_weight in graph[node]:
+            n_weight = cur_weight + weight # 해당 node를 거쳐 갈 때 거리 
+            if n_weight < cost[cur_node]: # 현재 거리보다 작으면 갱신
+                cost[cur_node] = n_weight
+                heapq.heappush(heap, [n_weight, cur_node]) # 다음 인접 node를 계산하기 위해 heap 에 삽입
 
-            if next_cost < cost[next]:
-                cost[next] = next_cost
+# graph 생성
+for i in range(e):
+    u, v, w = map(int, sys.stdin.readline().split())
+    graph[u].append([v, w])
 
-                heapq.heappush(queue,(next_cost,next))
+dijkstra(k)
 
-
-# graph 초기
-for i in range(E):
-    U,V,W = map(int,read().split())
-    # 가중치 , 목적지 노드 
-    graph[U].append((W,V))
-
-Dijkstra(start)
-
-for i in range(0,V):
-    print(cost[i])
-    if cost[i] == INF:
-        print("INF")
-    else:
-        print(cost[i])
+for i in cost[1:]:
+    print(i if i != INF else "INF")
