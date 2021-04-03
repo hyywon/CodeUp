@@ -18,7 +18,7 @@ import sys, heapq
 read = sys.stdin.readline
 INF = sys.maxsize
 
-v, e = map(int, sys.stdin.readline().split())
+v, e = map(int, read().split())
 k = int(sys.stdin.readline())
 graph = [[] for _ in range(v + 1)]
 cost = [INF] * (v + 1)
@@ -47,7 +47,7 @@ def dijkstra(start):
 
 # graph 생성
 for i in range(e):
-    u, v, w = map(int, sys.stdin.readline().split())
+    u, v, w = map(int, read().split())
     graph[u].append([v, w])
 
 dijkstra(k)
