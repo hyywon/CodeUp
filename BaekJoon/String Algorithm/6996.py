@@ -24,6 +24,7 @@ for _ in range(N):
 
 for i in range(N):
     A, B = anagram[i]
+    # 문자열을 정렬해서 정확하게 같으면 애너그램
     a = sorted(A)
     b = sorted(B)
 
